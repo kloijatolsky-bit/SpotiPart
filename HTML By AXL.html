@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotipart - Music Player</title>
+    <link rel="stylesheet" href="D:\SchoolWorks\my-group-project\CSS By Axl.css">
+    <link rel="stylesheet" href="D:\SchoolWorks\my-group-project\JS By Axl.js">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- 1. Semantic Sidebar -->
+        <aside class="sidebar">
+            <h1 class="logo">Spotipart</h1>
+            <nav class="nav-links">
+                <a href="#" class="active">🏠 Home</a>
+                <a href="#">🔍 Search</a>
+                <a href="#">📚 Library</a>
+            </nav>
+            <div class="playlists">
+                <button id="createPlaylistBtn">+ New Playlist</button>
+                <ul id="playlistList">
+                    <li>Favorites</li>
+                    <li>Chill Vibe</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- 2. Main Music Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <input type="text" id="searchInput" placeholder="Search song or artist..." />
+                <div class="user-badge">Aparrt69</div>
+            </header>
+
+            <section class="hero-banner">
+                <div class="hero-art">🎵</div>
+                <div class="hero-text">
+                    <span class="tag">FEATURED PLAYLIST</span>
+                    <h2>Chill Vibes 2026</h2>
+                    <p>Curated for coding, study, and relaxing.</p>
+                    <button id="playAllBtn" class="primary-btn">▶ Play All</button>
+                </div>
+            </section>
+
+            <!-- 3. Dynamic Tracklist Container -->
+            <!-- Instead of 180 lines of copy-pasted <tr>, JS populates this cleanly! -->
+            <section class="tracks-section">
+                <div class="tracks-header">
+                    <span>#</span>
+                    <span>Title & Artist</span>
+                    <span>Album</span>
+                    <span>Duration</span>
+                </div>
+                <div id="tracksContainer" class="tracks-list">
+                    <!-- Populated cleanly in 10 lines of JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 4. Working Bottom Audio Player -->
+    <footer class="player-bar">
+        <div class="now-playing">
+            <div id="playerArt" class="player-art">🎵</div>
+            <div>
+                <strong id="playerTitle">Select a track</strong>
+                <p id="playerArtist">Spotipart Player</p>
+            </div>
+        </div>
+
+        <div class="player-controls">
+            <div class="control-btns">
+                <button id="prevBtn" title="Previous">⏮</button>
+                <button id="playBtn" class="play-circle" title="Play">▶</button>
+                <button id="nextBtn" title="Next">⏭</button>
+            </div>
+            <div class="progress-wrap">
+                <span id="currentTime">0:00</span>
+                <input type="range" id="progressBar" value="0" min="0" max="100">
+                <span id="totalDuration">0:00</span>
+            </div>
+        </div>
+
+        <div class="volume-wrap">
+            <span>🔊</span>
+            <input type="range" id="volumeBar" value="80" min="0" max="100">
+        </div>
+    </footer>
+
+    <script src="D:\SchoolWorks\my-group-project\JS By Axl.js"></script>
+</body>
+</html>
