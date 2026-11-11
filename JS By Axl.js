@@ -7,12 +7,13 @@
 // 1. Data Source (Array of Objects)
 // Instead of 180 lines of duplicate HTML, keep songs in a clean array!
 const playlist = [
-    { id: 1, title: "Title Alpha", artist: "Artist Alpha", album: "Album Alpha", duration: "2:45" },
-    { id: 2, title: "Title Beta", artist: "Artist Beta", album: "Album Beta", duration: "3:12" },
-    { id: 3, title: "Title Gamma", artist: "Artist Gamma", album: "Album Gamma", duration: "2:58" },
-    { id: 4, title: "Title Delta", artist: "Artist Delta", album: "Album Delta", duration: "3:30" },
-    { id: 5, title: "Title Epsilon", artist: "Artist Epsilon", album: "Album Epsilon", duration: "2:20" }
+  { id: 1, title: "All Too Well", artist: "Taylor Swift", album: "Red", duration: "5:29", image: "images/all-too-well.jpg" },
+  { id: 2, title: "Cardigan", artist: "Taylor Swift", album: "Folklore", duration: "4:00", image: "images/cardigan.jpg" },
+  { id: 3, title: "I Think They Call This Love", artist: "Elliot James Reay", album: "I Think They Call This Love - Single", duration: "3:13", image: "images/i-think-they-call-this-love.jpg" },
+  { id: 4, title: "Chanel", artist: "Frank Ocean", album: "Chanel - Single", duration: "3:30", image: "images/chanel.jpg" },
+  { id: 5, title: "Trust Issues", artist: "Drake", album: "Care Package", duration: "4:41", image: "images/trust-issues.jpg" }
 ];
+
 
 // 2. DOM Elements Selection
 const tracksContainer = document.getElementById("tracksContainer");
