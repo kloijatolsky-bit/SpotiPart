@@ -1,1 +1,126 @@
 Ako ning file ayaw hilabti paghimo ug imo
+
+The Core Concept in Plain English
+A karaoke player only needs to check one simple condition whenever the music time updates:
+In Data: Store your lyrics inside each song as an array of objects with seconds (time) and text (text).
+In HTML: Provide a single <div id="lyricsContainer"></div>.
+In JS: As the song plays, find the active line whose timestamp has arrived, add the .active class to it, and scroll it smoothly into view.
+Step 1: Add Timed Lyrics to your js spotipart.js
+Inside your existing playlist array, add a lyrics array with timestamps in seconds:
+JavaScript
+const playlist = [
+    { 
+        id: 1, 
+        title: "Title Alpha", 
+        artist: "Artist Alpha", 
+        album: "Album Alpha", 
+        duration: "2:45",
+        // ⭐ NEW: Add timestamp (in seconds) + text
+        lyrics: [
+            { time: 0, text: "♪ (Intro music playing...) ♪" },
+            { time: 4, text: "Late night coding with the terminal glow" },
+            { time: 8, text: "Drinking hot coffee and letting rhythm flow" },
+            { time: 14, text: "Writing our loops and functions in line" },
+            { time: 20, text: "Everything compiles and runs just fine" },
+            { time: 28, text: "Spotipart player shines tonight" }
+        ]
+    },
+    // ... other songs
+];
+Step 2: Add the Container to index.html
+Place this inside your <main class="main-content"> (for example, below the tracks section):
+Html
+<!-- Dynamic Karaoke Lyrics Section -->
+<section class="lyrics-section">
+    <h3 style="margin-bottom: 12px;">🎤 Live Karaoke Lyrics</h3>
+    <div id="lyricsContainer" class="lyrics-container">
+        <p>Select a track to see lyrics...</p>
+    </div>
+</section>
+Step 3: Add Styling to css spotipart.css
+Add these few lines to make the active karaoke line glow in Spotify green and scroll smoothly:
+CSS
+/* Scrollable lyrics box */
+.lyrics-container {
+    max-height: 240px;
+    overflow-y: auto;
+    background: #181818;
+    border: 1px solid #282828;
+    border-radius: 10px;
+    padding: 16px;
+    scroll-behavior: smooth;
+}
+
+/* Default dimmed lyric line */
+.lyric-line {
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #666;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ⭐ The active karaoke line */
+.lyric-line.active {
+    color: #1db954; /* Spotify green */
+    font-size: 20px;
+    font-weight: 800;
+    background: rgba(29, 185, 84, 0.15);
+    transform: scale(1.02);
+}
+Step 4: Add the 2 Functions in js spotipart.js
+Add these two short functions and hook them into your playback:
+JavaScript
+const lyricsContainer = document.getElementById("lyricsContainer");
+
+// 1. Create the lyric elements when a song starts
+function renderLyrics(song) {
+    lyricsContainer.innerHTML = "";
+    if (!song.lyrics) return;
+
+    song.lyrics.forEach((line) => {
+        const div = document.createElement("div");
+        div.className = "lyric-line";
+        div.textContent = line.text;
+
+        // Bonus: Click any lyric line to jump the song to that exact second!
+        div.addEventListener("click", () => {
+            audioProgress = line.time;
+            updateLyrics(audioProgress);
+        });
+
+        lyricsContainer.appendChild(div);
+    });
+}
+
+// 2. Synchronize the active line as time updates
+function updateLyrics(currentTime) {
+    const song = playlist[currentTrackIndex];
+    if (!song || !song.lyrics) return;
+
+    // Find the latest lyric line whose timestamp has arrived
+    let activeIndex = -1;
+    for (let i = 0; i < song.lyrics.length; i++) {
+        if (currentTime >= song.lyrics[i].time) {
+            activeIndex = i;
+        }
+    }
+
+    // Highlight the active line and scroll it into center
+    const allLines = lyricsContainer.querySelectorAll(".lyric-line");
+    allLines.forEach((lineEl, idx) => {
+        if (idx === activeIndex) {
+            lineEl.classList.add("active");
+            lineEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        } else {
+            lineEl.classList.remove("active");
+        }
+    });
+}
+Whenever your audio time updates (inside your setInterval progress timer or audio.ontimeupdate), simply call:
+JavaScript
+updateLyrics(audioProgress);
+And in playSongByIndex(index), call:
+JavaScript
+renderLyrics(playlist[index]);
