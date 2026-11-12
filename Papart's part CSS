@@ -1,0 +1,220 @@
+:root {
+    --bg-dark: #121212;
+    --bg-card: #181818;
+    --bg-sidebar: #050505;
+    --primary: #1db954;
+    --text-white: #ffffff;
+    --text-muted: #b3b3b3;
+    --border: #282828;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: system-ui, -apple-system, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* 1. Modern Grid Layout (Replaces brittle fixed pixel margins!) */
+.app-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* 2. Sidebar Navigation */
+.sidebar {
+    background-color: var(--bg-sidebar);
+    padding: 24px 16px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.logo {
+    font-size: 24px;
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.nav-links a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.nav-links a.active, .nav-links a:hover {
+    color: var(--text-white);
+    background: #202020;
+}
+
+/* 3. Main Content Area */
+.main-content {
+    overflow-y: auto;
+    padding: 24px 32px 100px;
+    background: linear-gradient(180deg, #1e3a2b 0%, #121212 400px);
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+#searchInput {
+    background: #2a2a2a;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 18px;
+    color: white;
+    width: 260px;
+}
+
+/* Hero Playlist Banner */
+.hero-banner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.hero-art {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #1db954, #12632b);
+    display: grid;
+    place-items: center;
+    font-size: 54px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: black;
+    font-weight: bold;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 24px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: transform 0.2s;
+}
+
+.primary-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Track List - Flex/Grid instead of rigid HTML table */
+.tracks-header, .track-item {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr 60px;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+.tracks-header {
+    color: var(--text-muted);
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+}
+
+.track-item {
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.track-item:hover, .track-item.playing {
+    background: #ffffff18;
+}
+
+.track-item.playing .track-title {
+    color: var(--primary);
+}
+
+/* 4. Bottom Player Controls */
+.player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 84px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.play-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* 5. Clean Single Responsive Breakpoint (Replaces 150 lines of complex media queries!) */
+@media (max-width: 768px) {
+    .app-layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar {
+        display: none; /* Can toggle via mobile drawer */
+    }
+    .tracks-header span:nth-child(3),
+    .track-item span:nth-child(3) {
+        display: none; /* Hide album on mobile */
+    }
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.track-image {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.track-title {
+    font-weight: 600;
+    color: white;
+}
+
+.track-artist {
+    font-size: 12px;
+    color: #888;
+}
