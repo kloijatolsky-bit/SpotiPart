@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotipart - Music Player</title>
     <link rel="stylesheet" href="Papart's part CSS">
-    <link rel="stylesheet" href="D:\SchoolWorks\my-group-project\JS By Axl.js">
+    <link rel="stylesheet" href="Papart's part JS">
 </head>
 <body>
     <div class="app-layout">
@@ -88,6 +88,6 @@
         </div>
     </footer>
 
-    <script src="D:\SchoolWorks\my-group-project\JS By Axl.js"></script>
+    <script src="Papart's part JS"></script>
 </body>
 </html>
